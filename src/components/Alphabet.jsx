@@ -3,11 +3,8 @@ import { Link } from 'react-router-dom';
 
 const Alphabet = () => {
     const [outputString, setOutputString] = useState('');
-    const [isLoading, setIsLoading] = useState(false); // New state for loading
 
     const handleClick = (letter) => {
-        setIsLoading(true); // Set loading state to true when handling click
-
         setOutputString(prevOutputString => {
             // Append clicked letter to outputString
             const newOutputString = prevOutputString + letter;
@@ -28,20 +25,14 @@ const Alphabet = () => {
                 }
             }
 
-            setIsLoading(false); // Set loading state to false after processing
             return newString;
         });
     };
 
     const handleDelete = () => {
-        setIsLoading(true); // Set loading state to true when deleting
-
         setOutputString(prevOutputString => {
             // Remove the last character from the output string
-            const newOutput = prevOutputString.slice(0, -1);
-
-            setIsLoading(false); // Set loading state to false after deleting
-            return newOutput;
+            return prevOutputString.slice(0, -1);
         });
     };
 
@@ -66,7 +57,7 @@ const Alphabet = () => {
             </div>
             <div className='bg-red-500 p-2 rounded-lg text-white font-semibold text-left' id="outputString">
                 <div className='flex justify-between items-center '>
-                    <h1 className=''> Output: {isLoading ? 'Loading...' : (outputString ? outputString : 'No string selected')}</h1>
+                    <h1 className=''> Output: {outputString ? outputString : 'No string selected'}</h1>
                     <button className=" text-white border-2 py-2 px-4 rounded hover:scale-105 hover:shadow-2xl active:scale-95 font-semibold duration-300 p-2 cursor-pointer" onClick={handleDelete}>X</button>
                 </div>
             </div>
