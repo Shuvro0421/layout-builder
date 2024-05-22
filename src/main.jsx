@@ -7,6 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Body from './components/Body.jsx';
+import Alphabet from './components/Alphabet.jsx';
 
 
 
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Body></Body>
+  },
+  {
+    path: "/alphabet",
+    element: <Alphabet></Alphabet>
   },
 ]);
 

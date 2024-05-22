@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
+import { Link } from 'react-router-dom';
 
 const getRandomColor = () => {
     const letters = '0123456789ABCDEF';
@@ -19,7 +20,7 @@ const generateId = () => {
 const Partition = ({ id, color, direction, children, onSplit, onRemove, isRoot }) => {
     return (
         <ResizableBox
-            className={`relative ${direction === 'V' ? 'flex-row' : 'flex-col'} flex-1 rounded-lg shadow-2xl `}
+            className={`relative ${direction === 'V' ? 'flex-row' : 'flex-col'} flex-1 rounded-lg shadow-2xl`}
             width={direction === 'V' ? 200 : '100%'}
             height={direction === 'H' ? 200 : '100%'}
             minConstraints={[50, 50]}
@@ -38,9 +39,9 @@ const Partition = ({ id, color, direction, children, onSplit, onRemove, isRoot }
                 ))
             ) : (
                 <div className="w-full h-full gap-5 flex justify-center items-center">
-                    <button className={`w-1/4  bg-white bg-opacity-80 border-none rounded px-2 py-1 cursor-pointer transition transform hover:bg-opacity-100 hover:scale-105" onClick={() => onSplit(id, 'V')`}>V</button>
-                    <button className="w-1/4 bg-white bg-opacity-80 border-none rounded px-2 py-1 cursor-pointer transition transform hover:bg-opacity-100 hover:scale-105" onClick={() => onSplit(id, 'H')}>H</button>
-                    {!isRoot && <button className="absolute top-2 right-2 bg-white bg-opacity-80 border-none rounded px-2 py-1 cursor-pointer transition transform hover:bg-opacity-100 hover:scale-105" onClick={() => onRemove(id)}>-</button>}
+                    <button className="w-1/4 bg-white bg-opacity-80 border-none rounded px-2 py-1 cursor-pointer transition transform hover:bg-opacity-100 hover:scale-105 active:scale-95" onClick={() => onSplit(id, 'V')}>V</button>
+                    <button className="w-1/4 bg-white bg-opacity-80 border-none rounded px-2 py-1 cursor-pointer transition transform hover:bg-opacity-100 hover:scale-105 active:scale-95" onClick={() => onSplit(id, 'H')}>H</button>
+                    {!isRoot && <button className="absolute top-2 right-2 bg-white bg-opacity-80 border-none rounded px-2 py-1 cursor-pointer transition transform hover:bg-opacity-100 hover:scale-105 active:scale-95" onClick={() => onRemove(id)}>-</button>}
                 </div>
             )}
         </ResizableBox>
@@ -104,7 +105,12 @@ const Body = () => {
 
     return (
         <div>
-            <div className="flex flex-col h-screen rounded-lg  bg-gray-300 p-4">
+            <Link to="/alphabet"><h1 className='text-xl text-red-500 font-semibold'>Alphabet Tile Interaction</h1></Link>
+            <div className='font-semibold text-2xl mb-2 text-left'>
+                <h1>Recursive Partitioning</h1>
+                
+            </div>
+            <div className="flex flex-col h-screen bg-gray-300 rounded-lg w-full p-4">
                 {partitions.map((partition, index) => (
                     <Partition
                         key={partition.id}
